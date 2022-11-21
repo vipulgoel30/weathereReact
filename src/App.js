@@ -1,4 +1,5 @@
 function App() {
+  console.log("data");
   const changeInput = () => {
     const value = document.querySelector(".data").value;
     fetch(
