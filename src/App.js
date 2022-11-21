@@ -1,23 +1,28 @@
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import Loader from "./Loader/Loader";
 function App() {
-  console.log("data");
-  const changeInput = () => {
-    const value = document.querySelector(".data").value;
-    fetch(
-      `https://api.locationiq.com/v1/autocomplete?key=${process.env.REACT_APP_LOCATION_IQ}&q=${value}&limit=5&dedupe=1`
-    )
-      .then((temp) => {
-        return temp.json();
-      })
-      .then((data) => {
-        console.log(data);
-      });
+  const [loaderState, setLoaderState] = useState(true);
+  const [location, setLocation] = useState();
+  const successLocation = (data) => {
+    setLocation(data);
+
+    setLoaderState(false);
   };
-  return (
-    <div>
-      <input type="text" className="data"></input>
-      <button onClick={changeInput}>Submit</button>
-    </div>
-  );
+  const errorLocation = (data) => {
+    setLoaderState(false);
+  };
+  useEffect(() => {
+    console.log(navigator.geolocation);
+    navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
+      timeout: 3000,
+    });
+    setTimeout(() => {
+      setLoaderState(false);
+    }, 3000);
+    window.vibrate([200, 100, 300]);
+  }, []);
+  return <>{loaderState && <Loader />}</>;
 }
 
 export default App;
