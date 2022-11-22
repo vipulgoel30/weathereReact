@@ -20,8 +20,9 @@ function App() {
     setTimeout(() => {
       setLoaderState(false);
     }, 3000);
-    window.vibrate([200, 100]);
+    window.navigator.vibrate([200, 100]);
   }, []);
+
   return <>{loaderState && <Loader />}</>;
 }
 
