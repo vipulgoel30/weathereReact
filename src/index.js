@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from "./App";
-import LocationContextProvider from "./ContextProviders/LocationContextProvider";
+import ContextProvider from "./ContextProviders/ContextProvider";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   // <React.StrictMode>
-  <LocationContextProvider>
+  <ContextProvider>
     <App />
-  </LocationContextProvider>
+  </ContextProvider>
   // </React.StrictMode>
 );
 

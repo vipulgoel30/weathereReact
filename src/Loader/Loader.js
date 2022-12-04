@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { useLoaderContext } from "../ContextProviders/LoaderContextProvider";
 import LoaderItem from "./LoaderItem";
 
 // whole container of the loader
@@ -80,7 +81,7 @@ function LoaderRowMiddle() {
 function Loader() {
   // setting loader dotes data
   const [dotes, setDotes] = useState(".");
-
+  const loader = useLoaderContext();
   useEffect(() => {
     const dotesInterval = setInterval(() => {
       setDotes((prevDotes) =>
@@ -104,7 +105,7 @@ function Loader() {
           <LoaderRowStartEnd />
         </LoaderElementsContainer>
         <LoaderText>
-          Please allow the location
+          {loader.message || "Please allow the location"}
           <LoaderDotes>{dotes}</LoaderDotes>
         </LoaderText>
       </LoaderContainer>
